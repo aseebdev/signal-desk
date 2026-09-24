@@ -9,6 +9,6 @@
     "check": "node --check dev-server.cjs && node --check script.js && node --check api/users.js && node --check api/health.js"
   },
   "engines": {
-    "node": "22.x"
+    "node": "24.x"
   }
 }
