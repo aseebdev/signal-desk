@@ -29,8 +29,8 @@ This repository is structured for Vercel:
 - `index.html`, `style.css`, and `script.js` are served as static assets.
 - `api/users.js` handles `POST /api/users`.
 - `api/health.js` handles `GET /api/health`.
-- `vercel.json` contains only static URL cleanup; Vercel automatically discovers the functions in `api/`.
-- `package.json` pins the Node engine to `24.x`.
+- `vercel.json` pins the functions to Node.js 22.
+- `package.json` pins the Node engine to `22.x`.
 
 No Vercel build command is required. If a dashboard asks for one, leave it blank. The default install command is `npm install` and the API functions are discovered from `api/`.
 
@@ -62,7 +62,7 @@ Returns a JSON health response showing whether the function is running under Ver
 
 The project includes semantic headings, metadata, Open Graph/Twitter metadata, SoftwareApplication/WebSite/FAQ structured data, `robots.txt`, and `sitemap.xml`.
 
-After deployment, update `sitemap.xml` and the WebSite URL in `index.html` to the final production domain if you later attach a custom domain. Submit the sitemap in Google Search Console.
+After deployment, update `sitemap.xml` and add the canonical URL to `index.html` using the final production domain. Submit the sitemap in Google Search Console.
 
 ## Integrity
 
