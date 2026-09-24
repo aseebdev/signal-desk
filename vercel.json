@@ -1,6 +1,0 @@
-{
-  "functions": {
-    "api/users.js": { "runtime": "nodejs22.x" },
-    "api/health.js": { "runtime": "nodejs22.x" }
-  }
-}
