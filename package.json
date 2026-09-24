@@ -1,0 +1,14 @@
+{
+  "name": "signaldesk",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Local-first personal action intelligence workspace.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "check": "node --check server.js && node --check script.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

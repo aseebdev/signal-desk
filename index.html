@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="SignalDesk turns scattered obligations into a focused action queue.">
+  <meta name="theme-color" content="#0d1117">
+  <title>SignalDesk — Personal Action Intelligence</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-theme="executive">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div id="toast-region" class="sr-only" aria-live="polite"></div>
+
+  <section id="entry-screen" class="entry-screen" aria-labelledby="entry-title">
+    <div class="entry-shell">
+      <div class="brand-mark" aria-hidden="true">S</div>
+      <p class="eyebrow">SIGNALDESK / PERSONAL OPERATING LAYER</p>
+      <h1 id="entry-title">Turn scattered signals into your next clear move.</h1>
+      <p class="entry-copy">A local-first workspace for obligations, ideas, follow-ups and decisions. No account password. No database. Your identity is only a name and age for this local session record.</p>
+      <form id="entry-form" novalidate>
+        <div class="field-grid">
+          <label>
+            <span>Name</span>
+            <input id="name" name="name" autocomplete="name" maxlength="60" required>
+          </label>
+          <label>
+            <span>Age</span>
+            <input id="age" name="age" type="number" min="1" max="120" inputmode="numeric" required>
+          </label>
+        </div>
+        <p id="entry-error" class="form-error" role="alert"></p>
+        <button class="primary-button full" type="submit">Enter SignalDesk <span aria-hidden="true">→</span></button>
+      </form>
+      <p class="privacy-note">Only name + age are sent to the local Node server and appended to <code>data/users.log</code>.</p>
+    </div>
+  </section>
+
+  <div id="app" class="app hidden">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button id="mobile-nav" class="icon-button mobile-only" aria-label="Open navigation" aria-expanded="false">☰</button>
+        <div class="brand-inline"><span class="brand-mark small">S</span><span>SignalDesk</span></div>
+      </div>
+      <div class="topbar-actions">
+        <span id="save-state" class="save-state">Local workspace</span>
+        <button id="theme-button" class="ghost-button" type="button">Theme</button>
+        <button id="export-button" class="ghost-button" type="button">Export</button>
+      </div>
+    </header>
+
+    <div class="layout">
+      <aside id="sidebar" class="sidebar" aria-label="Primary navigation">
+        <div class="user-card">
+          <div id="avatar" class="avatar">?</div>
+          <div><strong id="user-name">User</strong><small id="user-age">Age</small></div>
+        </div>
+        <nav>
+          <button class="nav-item active" data-view="inbox"><span>◈</span> Action queue <b id="queue-count">0</b></button>
+          <button class="nav-item" data-view="today"><span>◷</span> Today <b id="today-count">0</b></button>
+          <button class="nav-item" data-view="saved"><span>☆</span> Saved <b id="saved-count">0</b></button>
+          <button class="nav-item" data-view="history"><span>↺</span> History <b id="history-count">0</b></button>
+        </nav>
+        <div class="sidebar-footer">
+          <button class="nav-item" data-view="settings"><span>⚙</span> Settings</button>
+        </div>
+      </aside>
+
+      <main id="main" class="main">
+        <section id="view-inbox" class="view active" aria-labelledby="view-title">
+          <div class="hero-row">
+            <div>
+              <p class="eyebrow">FOCUS / <span id="date-label"></span></p>
+              <h2 id="view-title">Your action queue</h2>
+              <p class="muted">Capture what is competing for attention. SignalDesk ranks it using urgency, impact, effort and timing.</p>
+            </div>
+            <button id="capture-button" class="primary-button" type="button">+ Capture signal</button>
+          </div>
+
+          <div class="insight-strip">
+            <div><span class="metric-label">Active</span><strong id="metric-active">0</strong></div>
+            <div><span class="metric-label">Due soon</span><strong id="metric-soon">0</strong></div>
+            <div><span class="metric-label">High impact</span><strong id="metric-impact">0</strong></div>
+            <div class="insight-message"><span id="insight-text">Add your first signal to get a focused recommendation.</span></div>
+          </div>
+
+          <div class="toolbar">
+            <label class="search-box"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Search signals..." aria-label="Search signals"></label>
+            <select id="filter-category" aria-label="Filter by category">
+              <option value="all">All categories</option>
+              <option>Work</option><option>Study</option><option>Personal</option><option>Finance</option><option>Health</option><option>Idea</option>
+            </select>
+            <select id="sort-order" aria-label="Sort signals">
+              <option value="priority">Priority</option>
+              <option value="due">Due date</option>
+              <option value="newest">Newest</option>
+              <option value="effort">Lowest effort</option>
+            </select>
+          </div>
+
+          <div id="signal-list" class="signal-list" aria-live="polite"></div>
+          <div id="empty-state" class="empty-state hidden">
+            <div class="empty-icon">◇</div>
+            <h3>No signals here.</h3>
+            <p>Capture an obligation, follow-up, idea or decision. The engine will turn its inputs into a practical next action.</p>
+            <button class="secondary-button" type="button" id="empty-capture">Capture one</button>
+          </div>
+        </section>
+
+        <section id="view-today" class="view" aria-labelledby="today-title">
+          <div class="hero-row"><div><p class="eyebrow">TIMEBOX</p><h2 id="today-title">Today</h2><p class="muted">Only the signals that need attention today or are already overdue.</p></div></div>
+          <div id="today-list" class="signal-list"></div>
+          <div id="today-empty" class="empty-state hidden"><div class="empty-icon">✓</div><h3>Nothing due today.</h3><p>That is a clean slate. Add something when a new commitment appears.</p></div>
+        </section>
+
+        <section id="view-saved" class="view" aria-labelledby="saved-title">
+          <div class="hero-row"><div><p class="eyebrow">REFERENCE</p><h2 id="saved-title">Saved signals</h2><p class="muted">Keep important context without forcing it into today's queue.</p></div></div>
+          <div id="saved-list" class="signal-list"></div>
+          <div id="saved-empty" class="empty-state hidden"><div class="empty-icon">☆</div><h3>No saved signals.</h3><p>Use the star on any signal to keep it available for later.</p></div>
+        </section>
+
+        <section id="view-history" class="view" aria-labelledby="history-title">
+          <div class="hero-row"><div><p class="eyebrow">COMPLETION</p><h2 id="history-title">History</h2><p class="muted">A factual record of what you completed, useful for review and export.</p></div><button id="clear-history" class="ghost-button" type="button">Clear history</button></div>
+          <div id="history-list" class="history-list"></div>
+          <div id="history-empty" class="empty-state hidden"><div class="empty-icon">↺</div><h3>No completed signals yet.</h3><p>Complete an item and it will appear here.</p></div>
+        </section>
+
+        <section id="view-settings" class="view" aria-labelledby="settings-title">
+          <div class="hero-row"><div><p class="eyebrow">CONTROL</p><h2 id="settings-title">Settings</h2><p class="muted">Everything here is stored locally in your browser except the minimal entry record.</p></div></div>
+          <div class="settings-grid">
+            <article class="setting-card"><div><h3>Appearance</h3><p>Switch between three complete visual systems.</p></div><button id="settings-theme" class="secondary-button" type="button">Change theme</button></article>
+            <article class="setting-card"><div><h3>Workspace data</h3><p>Export your active and completed records as JSON. Importing replaces the current workspace after validation.</p></div><div class="button-row"><button id="settings-export" class="secondary-button" type="button">Export JSON</button><label class="secondary-button file-button">Import JSON<input id="import-file" type="file" accept="application/json" hidden></label></div></article>
+            <article class="setting-card danger"><div><h3>Reset workspace</h3><p>This removes local signals and history from this browser. Your server entry log is not deleted.</p></div><button id="reset-workspace" class="danger-button" type="button">Reset local data</button></article>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <dialog id="capture-dialog">
+    <form id="capture-form" method="dialog" novalidate>
+      <div class="dialog-head"><div><p class="eyebrow">NEW SIGNAL</p><h2>What needs your attention?</h2></div><button class="icon-button" value="cancel" aria-label="Close">×</button></div>
+      <label><span>Signal</span><input id="signal-title" maxlength="120" placeholder="e.g. Finish JavaScript module 3 review" required></label>
+      <div class="field-grid">
+        <label><span>Category</span><select id="signal-category"><option>Work</option><option>Study</option><option>Personal</option><option>Finance</option><option>Health</option><option>Idea</option></select></label>
+        <label><span>Due</span><input id="signal-due" type="date"></label>
+      </div>
+      <div class="field-grid">
+        <label><span>Impact <output id="impact-output">3</output>/5</span><input id="signal-impact" type="range" min="1" max="5" value="3"></label>
+        <label><span>Effort <output id="effort-output">3</output>/5</span><input id="signal-effort" type="range" min="1" max="5" value="3"></label>
+      </div>
+      <label><span>Context <small>(optional)</small></span><textarea id="signal-context" maxlength="500" rows="3" placeholder="What would make this easier to act on?"></textarea></label>
+      <p id="capture-error" class="form-error" role="alert"></p>
+      <div class="dialog-actions"><button class="ghost-button" value="cancel">Cancel</button><button class="primary-button" id="save-signal" value="default">Add to queue</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="recommend-dialog">
+    <div class="dialog-head"><div><p class="eyebrow">NEXT MOVE</p><h2 id="recommend-title">Suggested action</h2></div><button class="icon-button" id="close-recommend" aria-label="Close">×</button></div>
+    <div id="recommend-body" class="recommend-body"></div>
+    <div class="dialog-actions"><button id="recommend-complete" class="primary-button">Mark complete</button><button id="recommend-close" class="ghost-button">Close</button></div>
+  </dialog>
+
+  <div id="theme-menu" class="theme-menu hidden" aria-label="Theme chooser">
+    <button data-theme-choice="executive"><span class="theme-dot executive-dot"></span><span><strong>Executive</strong><small>Editorial luxury</small></span></button>
+    <button data-theme-choice="future"><span class="theme-dot future-dot"></span><span><strong>Future</strong><small>2026 systems</small></span></button>
+    <button data-theme-choice="human"><span class="theme-dot human-dot"></span><span><strong>Human</strong><small>Warm clarity</small></span></button>
+  </div>
+  <script src="script.js" defer></script>
+</body>
+</html>
