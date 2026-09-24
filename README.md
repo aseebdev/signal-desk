@@ -1,119 +1,69 @@
 # SignalDesk
 
-SignalDesk is a local-first personal action workspace. It solves a common 2026 problem: people accumulate obligations, ideas, follow-ups and decisions faster than they can turn them into clear next actions.
+SignalDesk is a local-first personal action intelligence workspace. It turns obligations, follow-ups, ideas, and decisions into a transparent, prioritized action queue.
 
-Instead of pretending to be an AI assistant, SignalDesk uses a transparent, deterministic prioritization engine. The score considers timing, impact and effort, and the UI explains why an item is being surfaced. This makes the recommendation inspectable and useful without an external AI key.
+## Stack
 
-## What it does
+- HTML5
+- CSS3
+- Vanilla JavaScript
+- Node.js 22 for local development
+- Vercel Functions for the production API
+- No database is required for the browser workspace
 
-- Minimal entry flow: name + age.
-- Persists the entry to `data/users.log` through a real Node.js filesystem write.
-- Captures actionable signals with category, due date, impact, effort and optional context.
-- Transparent priority scoring and next-action guidance.
-- Search, category filtering and sorting.
-- Today view for due/overdue work.
-- Saved signals.
-- Completion history.
-- JSON export/import with validation.
-- Three distinct visual themes: Executive, Future and Human.
-- Theme persistence with `localStorage`.
-- Workspace persistence with `localStorage`.
-- Responsive mobile/tablet/desktop layouts.
-- Semantic HTML, keyboard focus, reduced-motion support and restrained ARIA use.
-- Real server health endpoint.
-- No database and no frontend framework.
-
-## Install
-
-Requirements:
-
-- Node.js 18 or newer.
-
-No `npm install` is required because the server uses Node's built-in modules only.
+## Run locally
 
 ```bash
-cd signaldesk
-npm run check
+npm install
 npm start
 ```
 
-Then open:
+Open `http://127.0.0.1:3000`.
 
-`http://127.0.0.1:3000`
+The local Node server is `dev-server.cjs`. The production deployment does not use that long-running server.
 
-## User records
+## Vercel deployment
 
-The only server-side personal entry is appended to:
+This repository is structured for Vercel:
 
-`data/users.log`
+- `index.html`, `style.css`, and `script.js` are served as static assets.
+- `api/users.js` handles `POST /api/users`.
+- `api/health.js` handles `GET /api/health`.
+- `vercel.json` pins the functions to Node.js 22.
+- `package.json` pins the Node engine to `22.x`.
 
-Each successful entry has this shape:
+No Vercel build command is required. If a dashboard asks for one, leave it blank. The default install command is `npm install` and the API functions are discovered from `api/`.
 
-```text
-2026-09-24T17:30:00.000Z | Name: John | Age: 24 | Session: <uuid>
+## Data behavior
+
+The main workspace (signals, history, theme, and the browser session) is stored in the user's browser localStorage.
+
+For local development, the minimal Name + Age entry is appended to `data/users.log` by `dev-server.cjs`.
+
+On Vercel, serverless functions do not provide durable application filesystem storage. The production API therefore uses `/tmp` only as a runtime-local fallback and reports `storage: "ephemeral-runtime"`. This is intentionally not described as a permanent database. If permanent server-side registration records are required in production, connect a persistent store such as a managed database or object-storage service and update `api/users.js` accordingly.
+
+## API
+
+### `POST /api/users`
+
+Body:
+
+```json
+{"name":"Rockstar","age":21}
 ```
 
-Duplicate name + age entries are not appended again, but the current browser session is still allowed to enter the application.
+Returns a validated user object and the storage mode.
 
-Workspace signals and history stay in the browser's local storage. They are not sent to the server.
+### `GET /api/health`
 
-## Themes
+Returns a JSON health response showing whether the function is running under Vercel or the local Node server.
 
-The theme control switches between three complete design systems:
+## SEO
 
-1. **Executive** — restrained editorial/luxury visual language.
-2. **Future** — dark systems/terminal-inspired 2026 interface.
-3. **Human** — warm, rounded, accessibility-oriented consumer interface.
+The project includes semantic headings, metadata, Open Graph/Twitter metadata, SoftwareApplication/WebSite/FAQ structured data, `robots.txt`, and `sitemap.xml`.
 
-The selection is saved in `localStorage` and restored on reload.
+After deployment, update `sitemap.xml` and add the canonical URL to `index.html` using the final production domain. Submit the sitemap in Google Search Console.
 
-## API key
+## Integrity
 
-None is required.
-
-There is intentionally no fake AI endpoint. The product's ranking engine is deterministic and transparent. If a future deployment adds a real AI provider, the correct extension point is the server side rather than exposing a provider key in browser JavaScript.
-
-## Known limitations
-
-- `data/users.log` is intentionally simple local filesystem storage, not a multi-user production datastore.
-- There is no password authentication. The entry flow is intentionally lightweight and is not an identity/security boundary.
-- Browser local storage is device/browser scoped and can be cleared by the user.
-- Export files contain workspace content; treat them like personal data.
-- The app does not claim to be secure against a hostile local machine or a public internet deployment.
-
-## Security considerations
-
-- User input is validated on both client and server.
-- Server responses include `X-Content-Type-Options: nosniff`.
-- The server only exposes the application directory through normalized paths and blocks traversal outside the project root.
-- The user log is not exposed through an HTTP endpoint.
-- The browser renders user text through escaped HTML.
-- Request bodies are capped.
-- No secrets or API keys are shipped in the frontend.
-
-## Product logic
-
-The priority score is intentionally explainable:
-
-- Higher impact increases priority.
-- Near-term due dates increase priority.
-- Overdue work receives an additional urgency factor.
-- Higher effort slightly reduces priority so the queue does not become dominated by large, ambiguous tasks.
-
-The "Next" action shows the reason and a practical next move. It is a rule-based decision aid, not a fabricated AI response.
-
-## Verification
-
-The project includes a lightweight syntax check:
-
-```bash
-npm run check
-```
-
-The server exposes:
-
-```text
-GET /api/health
-```
-
-A fresh extraction should therefore be testable without any external service or database.
+SignalDesk's priority engine is deterministic and transparent. It does not claim to be AI and does not require an AI API key.

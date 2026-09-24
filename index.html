@@ -2,11 +2,82 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="SignalDesk turns scattered obligations into a focused action queue.">
-  <meta name="theme-color" content="#0d1117">
   <title>SignalDesk — Personal Action Intelligence</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="SignalDesk is a local-first personal action workspace for turning obligations, follow-ups, ideas, and decisions into a focused priority queue. Search, organize, prioritize, save, complete, and export your signals.">
+  <meta name="keywords" content="personal productivity, action management, task prioritization, priority queue, personal workflow, decision management, follow up tracker, productivity workspace, local first productivity, action planner">
+  <meta name="author" content="SignalDesk">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="theme-color" content="#1f5b4b">
+  <meta name="application-name" content="SignalDesk">
+  <meta name="apple-mobile-web-app-title" content="SignalDesk">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="canonical" href="https://signal-desk-ecru.vercel.app/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="SignalDesk — Personal Action Intelligence">
+  <meta property="og:description" content="Turn scattered obligations, follow-ups, ideas, and decisions into a focused action queue.">
+  <meta property="og:site_name" content="SignalDesk">
+  <meta property="og:url" content="https://signal-desk-ecru.vercel.app/">
+  <meta property="og:locale" content="en_US">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="SignalDesk — Personal Action Intelligence">
+  <meta name="twitter:description" content="A local-first workspace for prioritizing what actually needs your attention.">
+
+  <link rel="icon" href="data:,">
   <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "SignalDesk",
+    "applicationCategory": "ProductivityApplication",
+    "operatingSystem": "Web Browser",
+    "description": "A local-first personal action workspace for turning obligations, follow-ups, ideas, and decisions into a focused priority queue.",
+    "softwareRequirements": "Modern web browser and Node.js 22+ for self-hosting",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "featureList": [
+      "Action prioritization",
+      "Search and filtering",
+      "Due-date organization",
+      "Saved signals",
+      "Completion history",
+      "JSON import and export",
+      "Three visual themes",
+      "Local-first browser storage"
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type":"Question","name":"What is SignalDesk?","acceptedAnswer":{"@type":"Answer","text":"SignalDesk is a personal action workspace designed to help organize and prioritize obligations, follow-ups, ideas, and decisions."}},
+      {"@type":"Question","name":"Is SignalDesk a traditional to-do list?","acceptedAnswer":{"@type":"Answer","text":"SignalDesk attaches impact, effort, timing, category, and context to each signal and uses those inputs to produce a transparent priority score."}},
+      {"@type":"Question","name":"Does SignalDesk require an AI API key?","acceptedAnswer":{"@type":"Answer","text":"No. SignalDesk's current prioritization engine is transparent and works without an external AI provider."}},
+      {"@type":"Question","name":"Where is SignalDesk data stored?","acceptedAnswer":{"@type":"Answer","text":"Workspace data uses browser local storage, while the minimal name-and-age entry record is appended to a local data/users.log file by the Node.js server."}}
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "SignalDesk",
+    "url": "https://signal-desk-ecru.vercel.app/",
+    "description": "Personal action management and prioritization workspace"
+  }
+  </script>
 </head>
 <body data-theme="executive">
   <a class="skip-link" href="#main">Skip to content</a>
@@ -17,7 +88,7 @@
       <div class="brand-mark" aria-hidden="true">S</div>
       <p class="eyebrow">SIGNALDESK / PERSONAL OPERATING LAYER</p>
       <h1 id="entry-title">Turn scattered signals into your next clear move.</h1>
-      <p class="entry-copy">A local-first workspace for obligations, ideas, follow-ups and decisions. No account password. No database. Your identity is only a name and age for this local session record.</p>
+      <p class="entry-copy">A local-first workspace for obligations, ideas, follow-ups and decisions. No account password. Your identity is only a name and age for this session record.</p>
       <form id="entry-form" novalidate>
         <div class="field-grid">
           <label>
@@ -32,6 +103,25 @@
         <p id="entry-error" class="form-error" role="alert"></p>
         <button class="primary-button full" type="submit">Enter SignalDesk <span aria-hidden="true">→</span></button>
       </form>
+      <section class="seo-product-content" aria-labelledby="product-overview-title">
+        <h2 id="product-overview-title">A personal action management workspace built for real life</h2>
+        <p>SignalDesk helps you turn scattered obligations, follow-ups, ideas, and decisions into a practical action queue. Instead of another generic to-do list, each signal can carry timing, impact, effort, category, and context so you can decide what deserves attention first.</p>
+        <div class="seo-feature-grid">
+          <article><h3>Prioritize what matters</h3><p>Use transparent priority scoring based on impact, timing, urgency, and effort.</p></article>
+          <article><h3>Find anything quickly</h3><p>Search signals, filter by category, and sort by priority, due date, creation time, or effort.</p></article>
+          <article><h3>Stay focused today</h3><p>See due and overdue signals in a dedicated Today view and get a concrete next-move recommendation.</p></article>
+          <article><h3>Keep your data close</h3><p>Workspace records remain in browser storage, while the minimal entry record is processed by the app API.</p></article>
+          <article><h3>Save and review</h3><p>Star important signals, complete work, review your history, and export your workspace as JSON.</p></article>
+          <article><h3>Choose your interface</h3><p>Switch between Executive, Future, and Human visual systems and keep your preference across sessions.</p></article>
+        </div>
+      </section>
+      <section class="seo-faq" aria-labelledby="faq-title">
+        <h2 id="faq-title">SignalDesk frequently asked questions</h2>
+        <details><summary>What is SignalDesk?</summary><p>SignalDesk is a personal action workspace designed to help organize and prioritize obligations, follow-ups, ideas, and decisions.</p></details>
+        <details><summary>Is SignalDesk a traditional to-do list?</summary><p>It goes beyond a simple checklist by attaching impact, effort, timing, category, and context to each signal and using those inputs to produce a transparent priority score.</p></details>
+        <details><summary>Does SignalDesk require an AI API key?</summary><p>No. SignalDesk does not pretend deterministic rules are AI. Its current prioritization engine is transparent and works without an external AI provider.</p></details>
+        <details><summary>Where is SignalDesk data stored?</summary><p>The workspace uses browser local storage. The minimal name-and-age entry record is processed by the app API; local development writes it to data/users.log.</p></details>
+      </section>
       <p class="privacy-note">Only name + age are sent to the local Node server and appended to <code>data/users.log</code>.</p>
     </div>
   </section>

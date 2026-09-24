@@ -32,3 +32,15 @@ dialog{border:1px solid var(--line);background:var(--surface);color:var(--text);
 @media(max-width:850px){.layout{grid-template-columns:1fr}.sidebar{position:fixed;left:0;top:70px;bottom:0;width:250px;z-index:30;transform:translateX(-105%);transition:.2s;box-shadow:var(--shadow)}.sidebar.open{transform:none}.mobile-only{display:inline-flex}.topbar{padding:0 14px}.topbar-actions .save-state{display:none}.main{padding-top:30px}.hero-row{align-items:start;flex-direction:column}.toolbar{grid-template-columns:1fr 1fr}.toolbar .search-box{grid-column:1/-1}.insight-strip{grid-template-columns:repeat(3,1fr)}.insight-message{grid-column:1/-1}.setting-card{align-items:start;flex-direction:column}}
 @media(max-width:520px){.entry-shell{border-radius:22px}.field-grid{grid-template-columns:1fr}.topbar-actions .ghost-button{padding:8px}.brand-inline{font-size:14px}.main{padding:25px 14px}.hero-row h2{font-size:38px}.insight-strip{grid-template-columns:1fr 1fr}.insight-strip>div:nth-child(3){grid-column:1/-1}.signal-card{grid-template-columns:1fr}.signal-actions{justify-content:flex-end}.toolbar{grid-template-columns:1fr}.dialog-actions{flex-wrap:wrap}.dialog-actions>*{flex:1}.entry-shell h1{font-size:42px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+
+.seo-product-content,.seo-faq{margin-top:34px;padding-top:28px;border-top:1px solid var(--line)}
+.seo-product-content h2,.seo-faq h2{font-size:24px;letter-spacing:-.03em;margin:0 0 10px}
+.seo-product-content>p{max-width:760px;color:var(--muted);font-size:14px;line-height:1.7;margin:0}
+.seo-feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}
+.seo-feature-grid article{padding:15px;border:1px solid var(--line);border-radius:14px;background:color-mix(in srgb,var(--surface) 72%,transparent)}
+.seo-feature-grid h3{font-size:14px;margin:0 0 6px}
+.seo-feature-grid p,.seo-faq details{color:var(--muted);font-size:12px;line-height:1.6;margin:0}
+.seo-faq details{border-bottom:1px solid var(--line);padding:13px 0}
+.seo-faq summary{color:var(--text);font-weight:800;cursor:pointer}
+@media(max-width:720px){.seo-feature-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.seo-feature-grid{grid-template-columns:1fr}}
